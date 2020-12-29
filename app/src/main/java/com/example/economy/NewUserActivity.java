@@ -41,12 +41,11 @@ public class NewUserActivity extends AppCompatActivity {
 
         mTxtEmail = (EditText) findViewById(R.id.Txt_Email);
         mTxtPsswd = (EditText) findViewById(R.id.Txt_Psswd);
-        mBtnSingUp = (Button) findViewById(R.id.Btn_CrearUser);
+        mBtnSingUp = (Button) findViewById(R.id.Btn_SignUp);
 
         mBtnSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 CreateUser();
 
             }
@@ -77,7 +76,7 @@ public class NewUserActivity extends AppCompatActivity {
             Toast.makeText(NewUserActivity.this, "La contraseña debe tener minimo 8 Digitos",
                     Toast.LENGTH_SHORT).show();
             return;
-        }else if(isValidEmail(email)){
+        }else if(isValidEmail(email) != true){
             mTxtEmail.setError("Email no valido");
             return;
         }
@@ -104,8 +103,11 @@ public class NewUserActivity extends AppCompatActivity {
 
     }//end of CreateUser()
 
-    private boolean isValidEmail(CharSequence target){
+    /*
+    * Metod: comprueba si el email tiene in formato correcto
+    * return: devuelve un True si esta bien y False si esta mal
+    * */
+    public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
-
 }//end class
