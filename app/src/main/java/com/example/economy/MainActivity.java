@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private String email = "";
     private String psswd = "";
 
-    public MainActivity() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +39,13 @@ public class MainActivity extends AppCompatActivity {
         // Obtiene la instancia de FirebaseAnalytics.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
+        //Instanciamos firebaseAuth
+        mAuth = FirebaseAuth.getInstance();
+
         mBtnlogin = (Button) findViewById(R.id.Btn_LogIn);
         mBtnSignUp = (Button) findViewById(R.id.Btn_NewUser);
         mTxtEmail = (EditText) findViewById(R.id.Txt_Email);
-        mTxtPsswd = (EditText) findViewById(R.id.Txt_Email);
+        mTxtPsswd = (EditText) findViewById(R.id.Txt_Psswd);
 
 
 

@@ -15,14 +15,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class NewUserActivity extends AppCompatActivity {
 
-    private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
 
     private Button mBtnSingUp;
@@ -30,6 +28,8 @@ public class NewUserActivity extends AppCompatActivity {
     private EditText mTxtEmail;
     private EditText mTxtPsswd;
 
+    private String email;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class NewUserActivity extends AppCompatActivity {
         //instanciamos el autentificador de firebase
         mAuth = FirebaseAuth.getInstance();
 
-        mTxtEmail = (EditText) findViewById(R.id.Txt_Email);
+        mTxtEmail = findViewById(R.id.Txt_Email);
         mTxtPsswd = (EditText) findViewById(R.id.Txt_Psswd);
         mBtnSingUp = (Button) findViewById(R.id.Btn_SignUp);
 
@@ -63,8 +63,8 @@ public class NewUserActivity extends AppCompatActivity {
 
     private void CreateUser(){
 
-        String email = mTxtEmail.getText().toString();
-        String password = mTxtPsswd.getText().toString();
+        email = mTxtEmail.getText().toString();
+        password = mTxtPsswd.getText().toString();
 
         if(TextUtils.isEmpty(email)){
             mTxtPsswd.setError("introducca su Email");
@@ -81,7 +81,10 @@ public class NewUserActivity extends AppCompatActivity {
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        Log.i("Credenciales", email + ", " + password);
+
+
+        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
