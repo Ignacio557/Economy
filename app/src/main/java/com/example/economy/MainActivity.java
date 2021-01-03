@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 psswd = mTxtPsswd.getText().toString();
 
                 if(!email.isEmpty() && !psswd.isEmpty()){
-                    Login();
+                    Login(email, psswd);
                 }else {
 
                 }
@@ -80,15 +81,18 @@ public class MainActivity extends AppCompatActivity {
     *
     *Valdacion e Inicio de sesion
     **/
-    private void Login(){
+    private void Login(String email, String psswd){
 
         mAuth.signInWithEmailAndPassword(email, psswd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if(task.isSuccessful()){
+                    Toast.makeText(MainActivity.this, "Registro valido", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, HomeActivity.class));
                     finish();
+                }else{
+                    Toast.makeText(MainActivity.this, "Error en al Registrarse", Toast.LENGTH_SHORT).show();
                 }
 
             }
