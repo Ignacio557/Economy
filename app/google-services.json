@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1086403733484",
+    "project_id": "economy-tfg",
+    "storage_bucket": "economy-tfg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086403733484:android:34dc5c18a0011309e042c9",
+        "android_client_info": {
+          "package_name": "com.example.economy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086403733484-99h48j84bhnldfju385m6ql5uekuhv10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkchzh9gxQ0CREJ-GncGV4SR9gbQQDkcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086403733484-99h48j84bhnldfju385m6ql5uekuhv10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
