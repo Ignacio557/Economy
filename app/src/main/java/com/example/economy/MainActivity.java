@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     **/
     private void Login(String email, String psswd){
 
-        mAuth.signInWithEmailAndPassword(email, psswd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, psswd).addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
