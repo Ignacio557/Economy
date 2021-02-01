@@ -10,12 +10,12 @@ public class Carteras {
     private float sumatorio, ingresos, gastos;
     private String name, email;
 
-    public Carteras(FirebaseFirestore db, int ID, float sumatorio, float ingresos, float gastos, String name) {
+    public Carteras(FirebaseFirestore db, int ID, float sumatorio, String name) {
         this.db = db;
         this.ID = ID;
         this.sumatorio = sumatorio;
-        this.ingresos = ingresos;
-        this.gastos = gastos;
+        this.ingresos = 0;
+        this.gastos = 0;
         this.name = name;
     }
 
