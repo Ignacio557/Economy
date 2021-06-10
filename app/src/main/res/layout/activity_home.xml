@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".HomeActivity">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/frameContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4">
+        android:layout_alignParentTop="true"
+        app:layout_constraintBottom_toTopOf="@+id/btnMenu"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-
-    </LinearLayout>
-
-    <LinearLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/btnMenu"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6" />
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_menu"
+        app:labelVisibilityMode="selected"
+        style=""/>
 
-</LinearLayout>
+
+</RelativeLayout>

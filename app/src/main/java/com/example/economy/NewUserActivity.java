@@ -47,7 +47,6 @@ public class NewUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CreateUser();
-
             }
         });
 
