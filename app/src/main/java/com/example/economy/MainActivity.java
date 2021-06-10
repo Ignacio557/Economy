@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mBtnlogin;
     private Button mBtnSignUp;
+    private Button mBtnNewPsswd;
 
     private EditText mTxtEmail;
     private EditText mTxtPsswd;
@@ -43,12 +45,22 @@ public class MainActivity extends AppCompatActivity {
         //Instanciamos firebaseAuth
         mAuth = FirebaseAuth.getInstance();
 
+
+
         mBtnlogin = (Button) findViewById(R.id.Btn_LogIn);
         mBtnSignUp = (Button) findViewById(R.id.Btn_NewUser);
+        mBtnNewPsswd = (Button) findViewById(R.id.Btn_NewPsswd);
+
         mTxtEmail = (EditText) findViewById(R.id.Txt_Email);
         mTxtPsswd = (EditText) findViewById(R.id.Txt_Psswd);
 
-
+        mBtnNewPsswd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ResetPasswdActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mBtnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,20 +74,21 @@ public class MainActivity extends AppCompatActivity {
                 }else {
 
                 }
-
             }
         });
+
 
         mBtnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(v.getContext(), NewUserActivity.class);
                 startActivity(intent);
             }
         });
 
     }
+
+
 
     /*
     *

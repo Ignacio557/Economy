@@ -2,38 +2,47 @@ package com.example.economy;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.economy.connection.ConnectionSQLiteHelper;
+import com.example.economy.fragment.HomeFragment;
+import com.example.economy.fragment.InformesFragment;
+import com.example.economy.fragment.MovimientosFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private Carteras cartera01;
-    private Carteras cartera02;
-    private Carteras cartera03;
+    private BottomNavigationView btnMenu;
+    private Fragment fragment;
+    private FragmentManager manager;
 
-    private CardView cardCartera01;
-    private CardView cardCartera02;
-    private CardView cardCartera03;
+    SQLiteDatabase bd;
 
-    private CardView C1;
+     HomeFragment homeFragment = new HomeFragment();
+     MovimientosFragment movimientosFragment = new MovimientosFragment();
+     InformesFragment informesFragment = new InformesFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,45 +50,92 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         mAuth = FirebaseAuth.getInstance();
+        //instanciamos la base de datos
+        ConnectionSQLiteHelper conn = new ConnectionSQLiteHelper(HomeActivity.this);
+        bd = conn.getWritableDatabase();
 
-        cardCartera01 = (CardView) findViewById(R.id.cardCartera_01);
-        cardCartera02 = (CardView) findViewById(R.id.cardCartera_02);
-        cardCartera03 = (CardView) findViewById(R.id.cardCartera_03);
-
-        cardCartera01.setOnClickListener(this::onClick);
-        cardCartera02.setOnClickListener(this::onClick);
-        cardCartera03.setOnClickListener(this::onClick);
-
-        //cartera01 = new Carteras(db, 1, 0,0, 0, "cartera1");
+        initView();
+        initValues();
+        initListener();
 
     }
 
+    //comprueba si el usuario esta loggeado para darle paso a la app
+    @Override
+    protected void onStart(){
+        super.onStart();
 
-    public void onClick(View v) {
+        FirebaseUser mFirebaseUser = mAuth.getCurrentUser();
+        if(mFirebaseUser != null){
+
+        }else{
+            Toast.makeText(HomeActivity.this, "Error de Conexion", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        };
+    };
+
+    @Override
+    public void onClick(View v){
         switch (v.getId()){
-            case R.id.cardCartera_01:
-                Log.i("btnCartera1", "Se ejecuto onClick de cartera 01");
-                setup();
-                Intent intent = new Intent(v.getContext(), NewUserActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.cardCartera_02:
-                Log.i("btnCartera2", "Se ejecuto onClick de cartera 02");
-                Intent intent1 = new Intent(v.getContext(), NewUserActivity.class);
-                startActivity(intent1);
-                break;
-            case R.id.cardCartera_03:
-                Log.i("btnCartera3", "Se ejecuto onClick de cartera 03");
-                Intent intent2 = new Intent(v.getContext(), NewUserActivity.class);
-                startActivity(intent2);
-                break;
-            default:break;
-        }
 
+        }
+    }
+
+
+    private void initView(){
+        btnMenu = findViewById(R.id.btnMenu);
+    }
+
+    private void initValues(){
+        manager = getSupportFragmentManager();
+        Log.i("Fragment", "cargamos el fragmento: " +fragment);
+        LoadFirstFragment();
+    }
+
+    //CAMBIA ENTRE LOS FRAGMENTS DEL MENUBAR
+    private void initListener(){
+        btnMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_Home:
+                        Toast.makeText(HomeActivity.this, "btn home", Toast.LENGTH_SHORT).show();
+                        fragment = HomeFragment.newInstance();
+                        openFragemnt(fragment);
+                        return true;
+                    case R.id.menu_Informes:
+                        Toast.makeText(HomeActivity.this, "btn mov", Toast.LENGTH_SHORT).show();
+                        fragment = InformesFragment.newInstance();
+                        openFragemnt(fragment);
+                        return true;
+                    case R.id.menu_Movimientos:
+                        Toast.makeText(HomeActivity.this, "btn info", Toast.LENGTH_SHORT).show();
+                        fragment = MovimientosFragment.newInstance();
+                        openFragemnt(fragment);
+                        return true;
+                }
+                return false;
+            }
+        });
+     };
+
+     private void openFragemnt(Fragment fragment){
+         Log.i("Fragment", "cargamos el fragmento: " +fragment);
+         manager.beginTransaction().replace(R.id.frameContainer, fragment).commit();
+    }
+    private void LoadFirstFragment(){
+        fragment = HomeFragment.newInstance();
+        Toast.makeText(HomeActivity.this, "Cargamos"+fragment, Toast.LENGTH_LONG).show();
+        Log.i("Fragment", "cargamos el fragmento: " +fragment);
+        openFragemnt(fragment);
+    }
+
+    public void logOut(View view){
+        mAuth.signOut();
     }
 
     private void setup(){
-
        DocumentReference dr = db.collection("Users").document("Ignacio.f.diaz98@gmail.com").collection("Carteras").document("Cartera01");
         dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -87,12 +143,12 @@ public class HomeActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("prueba", "DocumentSnapshot data: " + document.getData());
+                        Log.i("prueba", "DocumentSnapshot data: " + document.getData());
                     } else {
-                        Log.d("prueba", "No such document");
+                        Log.i("prueba", "No such document");
                     }
                 } else {
-                    Log.d("prueba", "get failed with ", task.getException());
+                    Log.i("prueba", "get failed with ", task.getException());
                 }
 
             }
