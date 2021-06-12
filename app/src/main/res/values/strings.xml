@@ -22,4 +22,6 @@
     <string name="nombreCartera">Nombre de la Cartera</string>
     <string name="saldo_inicial">Saldo inicial</string>
     <string name="txt_psswd">Contraseña</string>
+    <string name="txt_bienvenida">Bienvenido a:</string>
+    <string name="txt_loginTitle">Login</string>
 </resources>

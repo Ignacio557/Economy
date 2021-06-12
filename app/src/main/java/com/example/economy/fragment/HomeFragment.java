@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -24,7 +25,7 @@ import com.example.economy.connection.ConnectionSQLiteHelper;
 
 public class HomeFragment extends Fragment /*implements Form_CrearCartera.CrearCarteraListener*/{
 
-    private Button btn_CrearCartera;
+    private CardView btn_CrearCartera;
 
     private View vista;
 
@@ -47,7 +48,7 @@ public class HomeFragment extends Fragment /*implements Form_CrearCartera.CrearC
 
         vista = inflater.inflate(R.layout.fragment_home, container, false);
         FragmentManager manager = this.getParentFragmentManager();
-        btn_CrearCartera = (Button) vista.findViewById(R.id.btn_NewCartera);
+        btn_CrearCartera = (CardView) vista.findViewById(R.id.btn_NewCartera);
         btn_CrearCartera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
