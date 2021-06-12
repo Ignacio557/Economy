@@ -27,7 +27,7 @@
                 android:layout_marginRight="100px"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="@string/txt_email" />
+                android:hint="@string/txt_email" />
 
             <EditText
                 android:id="@+id/Txt_Psswd"
@@ -37,6 +37,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="100px"
                 android:ems="10"
+                android:hint="@string/txt_psswd"
                 android:inputType="textPassword" />
 
             <Button
