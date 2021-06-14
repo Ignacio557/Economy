@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private Button mBtnlogin;
-    private Button mBtnSignUp;
-    private Button mBtnNewPsswd;
+    private TextView mBtnSignUp;
+    private TextView mBtnNewPsswd;
 
     private EditText mTxtEmail;
     private EditText mTxtPsswd;
@@ -48,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         mBtnlogin = (Button) findViewById(R.id.Btn_LogIn);
-        mBtnSignUp = (Button) findViewById(R.id.Btn_NewUser);
-        mBtnNewPsswd = (Button) findViewById(R.id.Btn_NewPsswd);
+        mBtnSignUp = (TextView) findViewById(R.id.Btn_NewUser);
+        mBtnNewPsswd = (TextView) findViewById(R.id.Btn_NewPsswd);
 
         mTxtEmail = (EditText) findViewById(R.id.Txt_Email);
         mTxtPsswd = (EditText) findViewById(R.id.Txt_Psswd);

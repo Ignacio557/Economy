@@ -54,6 +54,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/Principal"
                 android:text="@string/txt_email"
                 android:textStyle="bold"
                 android:textSize="18dp"
@@ -75,6 +76,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/Principal"
                 android:text="@string/txt_psswd"
                 android:textStyle="bold"
                 android:textSize="18dp"
@@ -100,7 +102,7 @@
                 android:layout_marginTop="35dp"
                 android:layout_marginRight="120px"
                 android:layout_marginBottom="80dp"
-                android:text="@string/txt_Loggin"/>
+                android:text="Registarse"/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

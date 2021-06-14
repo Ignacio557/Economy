@@ -25,7 +25,7 @@
             android:textStyle="bold"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="85dp"/>
+            android:layout_marginTop="90dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
             <androidx.cardview.widget.CardView
@@ -54,10 +54,11 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/Principal"
                         android:text="@string/txt_email"
                         android:textStyle="bold"
                         android:textSize="18dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="65dp"
                         android:layout_marginLeft="20dp"/>
 
                     <EditText
@@ -74,6 +75,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/Principal"
                         android:text="@string/txt_psswd"
                         android:textStyle="bold"
                         android:textSize="18dp"
@@ -92,7 +94,7 @@
                         android:inputType="textPassword" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/appCompatTextView"
+                        android:id="@+id/Btn_NewPsswd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -105,32 +107,6 @@
                         android:layout_marginRight="30dp"
                         android:paddingRight="10dp"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="30dp">
-
-                        <Button
-                            android:id="@+id/Btn_NewUser"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="1"
-                            android:text="@string/txt_NewUser"/>
-
-                        <Button
-                            android:id="@+id/Btn_NewPsswd"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_weight="2"
-                            android:text="@string/txt_NewPsswd" />
-
-
-                    </LinearLayout>
 
 
                     <Button
@@ -138,10 +114,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="120px"
-                        android:layout_marginTop="35dp"
+                        android:layout_marginTop="45dp"
                         android:layout_marginRight="120px"
-                        android:layout_marginBottom="80dp"
+                        android:layout_marginBottom="0px"
                         android:text="@string/txt_Loggin" />
+
+                    <TextView
+                        android:id="@+id/Btn_NewUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="30dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/txt_CrearCuenta"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/Principal"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 

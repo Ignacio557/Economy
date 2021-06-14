@@ -3,13 +3,17 @@ package com.example.economy.Entities;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-public class Carteras {
+public class Cartera {
 
     private int ID;
     private float SaldoTotal;
     private String Nombre, Comentario;
 
-    public Carteras(int ID, float saldoTotal, String nombre, String comentario) {
+    public Cartera (){
+
+    }
+
+    public Cartera(int ID, float saldoTotal, String nombre, String comentario) {
         this.ID = ID;
         SaldoTotal = saldoTotal;
         Nombre = nombre;

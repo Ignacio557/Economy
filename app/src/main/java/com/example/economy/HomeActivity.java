@@ -100,17 +100,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menu_Home:
-                        Toast.makeText(HomeActivity.this, "btn home", Toast.LENGTH_SHORT).show();
                         fragment = HomeFragment.newInstance();
                         openFragemnt(fragment);
                         return true;
                     case R.id.menu_Informes:
-                        Toast.makeText(HomeActivity.this, "btn mov", Toast.LENGTH_SHORT).show();
                         fragment = InformesFragment.newInstance();
                         openFragemnt(fragment);
                         return true;
                     case R.id.menu_Movimientos:
-                        Toast.makeText(HomeActivity.this, "btn info", Toast.LENGTH_SHORT).show();
                         fragment = MovimientosFragment.newInstance();
                         openFragemnt(fragment);
                         return true;
@@ -125,33 +122,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
          manager.beginTransaction().replace(R.id.frameContainer, fragment).commit();
     }
     private void LoadFirstFragment(){
-        fragment = HomeFragment.newInstance();
-        Toast.makeText(HomeActivity.this, "Cargamos"+fragment, Toast.LENGTH_LONG).show();
-        Log.i("Fragment", "cargamos el fragmento: " +fragment);
-        openFragemnt(fragment);
+         fragment = HomeFragment.newInstance();
+         Log.i("Fragment", "cargamos el fragmento: " +fragment);
+         openFragemnt(fragment);
     }
 
     public void logOut(View view){
         mAuth.signOut();
     }
 
-    private void setup(){
-       DocumentReference dr = db.collection("Users").document("Ignacio.f.diaz98@gmail.com").collection("Carteras").document("Cartera01");
-        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.i("prueba", "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.i("prueba", "No such document");
-                    }
-                } else {
-                    Log.i("prueba", "get failed with ", task.getException());
-                }
-
-            }
-        });
-    }
 }

@@ -15,7 +15,6 @@ public class ConnectionSQLiteHelper extends SQLiteOpenHelper {
         super(context, Utilidades.DATABASE_NOMBRE, null, Utilidades.DATABASE_VERSION);
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(Utilidades.TBL_CTR);
@@ -26,7 +25,9 @@ public class ConnectionSQLiteHelper extends SQLiteOpenHelper {
     //cuando cambie la version de la bd borrara la rabla antigua y creara la nueva
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE " + Utilidades.TABLE_CARTERA);
+        db.execSQL("DROP TABLE IF EXISTS " + Utilidades.TABLE_CARTERAS);
+        db.execSQL("DROP TABLE IF EXISTS " + Utilidades.TABLE_INGRESOS);
+        db.execSQL("DROP TABLE IF EXISTS " + Utilidades.TABLE_GASTOS);
         onCreate(db);
     }
 }
