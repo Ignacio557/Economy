@@ -14,14 +14,11 @@ import com.example.economy.R;
 public class InformesFragment extends Fragment {
 
 
-
-
     public InformesFragment() {
-        // Required empty public constructor
+
     }
 
     public static InformesFragment newInstance() {
-
         Bundle args = new Bundle();
 
         InformesFragment fragment = new InformesFragment();

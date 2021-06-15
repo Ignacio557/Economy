@@ -8,21 +8,23 @@
         android:id="@+id/edit_CarteraEmisora"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="emisor"/>
+        android:hint="Idcartera emisor"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/edit_CarteraReceptora"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_CarteraEmisora"
-        android:hint="receptor"/>
+        android:hint="IdCartera receptor"
+        android:inputType="number"/>
 
     <EditText
-    android:id="@+id/edit_TituloMovimiento"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/edit_CarteraEmisora"
-    android:hint="Titulo"/>
+        android:id="@+id/edit_TituloMovimiento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_CarteraReceptora"
+        android:hint="Titulo"/>
 
     <EditText
         android:id="@+id/edit_saldoCartera"
@@ -31,6 +33,6 @@
         android:hint="@string/saldo_inicial"
         android:layout_below="@+id/edit_TituloMovimiento"
         android:layout_alignParentStart="true"
-        android:inputType="number"/>
+        android:inputType="numberDecimal"/>
 
 </RelativeLayout>

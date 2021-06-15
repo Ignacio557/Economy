@@ -20,7 +20,6 @@ public class MovimientosFragment extends Fragment {
     }
 
     public static MovimientosFragment newInstance() {
-        
         Bundle args = new Bundle();
         
         MovimientosFragment fragment = new MovimientosFragment();
@@ -39,5 +38,6 @@ public class MovimientosFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_movimientos, container, false);
+
     }
 }

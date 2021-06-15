@@ -31,11 +31,12 @@ public class Carteras extends ConnectionSQLiteHelper {
             SQLiteDatabase db = conn.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("Titulo", titulo);
+            values.put("Comentario", "");
             values.put("SaldoTotal", saldoTotal);
 
             Log.i("insert", "inserto los datos de la nueva cartera: nombre "+titulo+" saldo: "+saldoTotal);
             id = db.insert(Utilidades.TABLE_CARTERAS, null, values);
-
+            Log.i("insert", values.toString());
         }catch (Exception ex){
             ex.toString();
         }

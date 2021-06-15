@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,9 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.economy.CRUD.Carteras;
 import com.example.economy.R;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Form_CrearCartera extends AppCompatDialogFragment{
 
@@ -33,6 +38,7 @@ public class Form_CrearCartera extends AppCompatDialogFragment{
         View view = inflater.inflate(R.layout.layout_dialog_formulario_cartera, null);
         eTxt_NombreCartera = view.findViewById(R.id.edit_nombreCartera);
         eTxt_saldoCartera = view.findViewById(R.id.edit_saldoCartera);
+        eTxt_saldoCartera.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
 
         builder.setView(view)
                 .setTitle("Nueva Cartera")
@@ -59,6 +65,18 @@ public class Form_CrearCartera extends AppCompatDialogFragment{
         return builder.create();
     };
 
-
+    static class DecimalDigitsInputFilter implements InputFilter {
+        private Pattern mPattern;
+        DecimalDigitsInputFilter(int digitsBeforeZero, int digitsAfterZero) {
+            mPattern = Pattern.compile("[0-9]{0," + (digitsBeforeZero - 1) + "}+((\\.[0-9]{0," + (digitsAfterZero - 1) + "})?)||(\\.)?");
+        }
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            Matcher matcher = mPattern.matcher(dest);
+            if (!matcher.matches())
+                return "";
+            return null;
+        }
+    }
 
 };

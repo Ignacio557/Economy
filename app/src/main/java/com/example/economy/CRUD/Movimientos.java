@@ -44,7 +44,7 @@ public class Movimientos extends ConnectionSQLiteHelper {
 
             //valores a insertar en la tabla de gastos de la carteera que emite la transferencia
             valuesEmision.put("Titulo", titulo);
-            valuesEmision.put("SaldoTotal", saldoTotal);
+            valuesEmision.put("Saldo", saldoTotal);
             valuesEmision.put("IdCartera", IdEmisor);
             valuesEmision.put("hastag", "Transferencia");
             valuesEmision.put("Fecha", FechaActual);

@@ -18,9 +18,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.economy.Dialog.Form_CrearCartera;
+import com.example.economy.Dialog.Form_CrearMovimiento;
 import com.example.economy.Entities.Cartera;
 import com.example.economy.HomeActivity;
 import com.example.economy.R;
@@ -35,10 +37,15 @@ public class HomeFragment extends Fragment {
 
     private CardView btn_CrearCartera;
     private CardView btn_CrearMovimiento;
-    private View vista;
-    private ListView listaCarteras;
+    private CardView btn_CargarCarteras;
+
     protected ArrayList<String> infCarteras;
     protected ArrayList<Cartera>  listaCartera;
+
+    private View vista;
+    private ListView listaCarteras;
+
+    private TextView Txt_SaldoTotal;
 
     ConnectionSQLiteHelper conn;
 
@@ -58,9 +65,11 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         vista = inflater.inflate(R.layout.fragment_home, container, false);
         FragmentManager manager = this.getParentFragmentManager();
+
+        Txt_SaldoTotal = (TextView) vista.findViewById(R.id.Txt_SaldoTotal);
+        Txt_SaldoTotal.setText(getSaldoAbsoluto());
 
         listaCarteras = (ListView) vista.findViewById(R.id.ListaCarteras);
         ConsultarCarteras();
@@ -68,13 +77,35 @@ public class HomeFragment extends Fragment {
         ArrayAdapter adapter = new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_expandable_list_item_1, infCarteras);
         listaCarteras.setAdapter(adapter);
 
+
         btn_CrearCartera = (CardView) vista.findViewById(R.id.btn_NewCartera);
         btn_CrearCartera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.i("boton", "Click en lo boton Crear Cartera");
                 Form_CrearCartera crearCartera = new Form_CrearCartera();
                 crearCartera.show(manager, "");
+            }
+        });
+
+        btn_CrearMovimiento = (CardView) vista.findViewById(R.id.btn_NewMovimiento);
+        btn_CrearMovimiento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("boton", "Click en lo boton Crear Movimiento");
+                Form_CrearMovimiento crearMovimiento = new Form_CrearMovimiento();
+                crearMovimiento.show(manager, "");
+            }
+        });
+
+        btn_CargarCarteras = (CardView) vista.findViewById(R.id.btn_CargarCarteras);
+        btn_CargarCarteras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("boton", "Click en lo boton Cargar Cartera ");
+                ConsultarCarteras();
+                ArrayAdapter adapter = new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_expandable_list_item_1, infCarteras);
+                listaCarteras.setAdapter(adapter);
             }
         });
 
@@ -82,6 +113,16 @@ public class HomeFragment extends Fragment {
         SQLiteDatabase bd = conn.getWritableDatabase();
 
         return vista;
+    }
+
+    private String getSaldoAbsoluto() {
+        conn = new ConnectionSQLiteHelper(this.getContext());
+        SQLiteDatabase db = conn.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select sum(SaldoTotal) from Carteras", null);
+        cursor.moveToFirst();
+        float saldo = cursor.getInt(0);
+        String Strg_saldo = String.valueOf(saldo);
+        return Strg_saldo;
     }
 
     @Override
@@ -101,7 +142,7 @@ public class HomeFragment extends Fragment {
             cartera = new Cartera();
             cartera.setID(cursor.getInt(0));
             cartera.setNombre(cursor.getString(1));
-            cartera.setSaldoTotal(cursor.getInt(2));
+            cartera.setSaldoTotal(cursor.getInt(3));
             listaCartera.add(cartera);
         }
 
@@ -114,7 +155,7 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i<listaCartera.size(); i++){
             infCarteras.add("Id " +listaCartera.get(i).getID()
                 +" - "+ listaCartera.get(i).getNombre()
-                    +" - "+ listaCartera.get(i).getSaldoTotal());
+                    +" - "+ listaCartera.get(i).getSaldoTotal()+"€");
         }
     }
 

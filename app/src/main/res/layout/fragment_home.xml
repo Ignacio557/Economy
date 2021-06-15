@@ -73,11 +73,12 @@
                     android:textSize="25dp" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/Txt_SaldoTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="38dp"
                     android:paddingTop="45dp"
-                    android:text="3.000,00 €"
+                    android:text=""
                     android:textColor="#fff"
                     android:textSize="40dp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -121,13 +122,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_NewMovimiento"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="30dp"
                 app:cardBackgroundColor="#D7E6A82A"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="10dp">
-
 
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -140,13 +141,14 @@
                         android:id="@+id/materialTextView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Movimientos_title"
+                        android:text="Crear Movimiento entre Carteras"
                         android:textColor="#fff" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/btn_CargarCarteras"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="30dp"
@@ -164,7 +166,7 @@
                         android:id="@+id/CerrarSession"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cerrar Sesión"
+                        android:text="Cargar Carteras"
                         android:textColor="#fff" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>

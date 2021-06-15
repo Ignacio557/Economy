@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,9 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.example.economy.CRUD.Carteras;
 import com.example.economy.CRUD.Movimientos;
 import com.example.economy.R;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Form_CrearMovimiento extends AppCompatDialogFragment {
 
@@ -64,10 +69,23 @@ public class Form_CrearMovimiento extends AppCompatDialogFragment {
         eTxt_CarteraReceptora = view.findViewById(R.id.edit_CarteraReceptora);
         eTxt_TituloMoviminetos = view.findViewById(R.id.edit_TituloMovimiento);
         eTxt_Saldo = view.findViewById(R.id.edit_saldoCartera);
+        eTxt_Saldo.setFilters(new InputFilter[]{new Form_CrearCartera.DecimalDigitsInputFilter(5, 2)});
 
         return builder.create();
     };
 
-
+    class DecimalDigitsInputFilter implements InputFilter {
+        private Pattern mPattern;
+        DecimalDigitsInputFilter(int digitsBeforeZero, int digitsAfterZero) {
+            mPattern = Pattern.compile("[0-9]{0," + (digitsBeforeZero - 1) + "}+((\\.[0-9]{0," + (digitsAfterZero - 1) + "})?)||(\\.)?");
+        }
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            Matcher matcher = mPattern.matcher(dest);
+            if (!matcher.matches())
+                return "";
+            return null;
+        }
+    }
 
 }
