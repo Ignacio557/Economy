@@ -1,7 +1,5 @@
 package com.example.economy.fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -15,19 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.economy.Dialog.Form_CrearCartera;
 import com.example.economy.Dialog.Form_CrearMovimiento;
 import com.example.economy.Entities.Cartera;
-import com.example.economy.HomeActivity;
 import com.example.economy.R;
-import com.example.economy.ResetPasswdActivity;
-import com.example.economy.Utilities.Utilidades;
 import com.example.economy.connection.ConnectionSQLiteHelper;
 
 import java.util.ArrayList;
@@ -49,9 +41,7 @@ public class HomeFragment extends Fragment {
 
     ConnectionSQLiteHelper conn;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
+    public HomeFragment() {}
 
     public static HomeFragment newInstance() {
         
@@ -106,6 +96,7 @@ public class HomeFragment extends Fragment {
                 ConsultarCarteras();
                 ArrayAdapter adapter = new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_expandable_list_item_1, infCarteras);
                 listaCarteras.setAdapter(adapter);
+                Txt_SaldoTotal.setText(getSaldoAbsoluto());
             }
         });
 
@@ -142,7 +133,7 @@ public class HomeFragment extends Fragment {
             cartera = new Cartera();
             cartera.setID(cursor.getInt(0));
             cartera.setNombre(cursor.getString(1));
-            cartera.setSaldoTotal(cursor.getInt(3));
+            cartera.setSaldoTotal(cursor.getFloat(3));
             listaCartera.add(cartera);
         }
 

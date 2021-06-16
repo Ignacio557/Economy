@@ -39,7 +39,6 @@ public class Form_CrearCartera extends AppCompatDialogFragment{
         eTxt_NombreCartera = view.findViewById(R.id.edit_nombreCartera);
         eTxt_saldoCartera = view.findViewById(R.id.edit_saldoCartera);
         eTxt_saldoCartera.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
-
         builder.setView(view)
                 .setTitle("Nueva Cartera")
                 .setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
@@ -53,7 +52,7 @@ public class Form_CrearCartera extends AppCompatDialogFragment{
                     public void onClick(DialogInterface dialog, int which) {
                         String nombre  = eTxt_NombreCartera.getText().toString();
                         String S_saldo = eTxt_saldoCartera.getText().toString();
-                        Float F_saldo = Float.parseFloat(S_saldo);
+                        Float F_saldo  = Float.parseFloat(S_saldo);
 
                         Log.i("insert", "insertamos "+nombre+" con el saldo "+S_saldo);
                         newCartera.insertCartera(nombre, F_saldo);

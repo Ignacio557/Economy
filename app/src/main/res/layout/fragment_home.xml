@@ -196,11 +196,19 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <ListView
-                android:id="@+id/ListaCarteras"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true">
+
+                <ListView
+                    android:id="@+id/ListaCarteras"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true">
+
+                </ListView>
+            </ScrollView>
 
 
         </LinearLayout>

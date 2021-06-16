@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -16,6 +17,8 @@ import java.util.Date;
 
 public class Movimientos extends ConnectionSQLiteHelper {
     Context context;
+
+    private Carteras crud_cartera = new Carteras(context);
 
     long ahora = System.currentTimeMillis();
     Date fecha = new Date(ahora);
@@ -36,8 +39,11 @@ public class Movimientos extends ConnectionSQLiteHelper {
             ContentValues valuesEmision = new ContentValues();
             ContentValues valuesRecepccion = new ContentValues();
 
-            Cursor idE = db.rawQuery("SELECT codigo, nombre, apellidos FROM usuarios", null);
-            Cursor idR = db.rawQuery("SELECT codigo, nombre, apellidos FROM usuarios", null);
+            String Strg_idE[] = {String.valueOf(Emisor)};
+            String Strg_idR[] = {String.valueOf(Receptor)};
+
+            Cursor idE = db.rawQuery("SELECT Id FROM Carteras Where Id=?", Strg_idE);
+            Cursor idR = db.rawQuery("SELECT Id FROM Carteras Where Id=?", Strg_idR);
 
             int IdEmisor = idE.getInt(0);
             int IdReceptor = idR.getInt(0);
@@ -56,7 +62,10 @@ public class Movimientos extends ConnectionSQLiteHelper {
             valuesEmision.put("hastag", "Transferencia");
             valuesEmision.put("Fecha", FechaActual);
 
+            crud_cartera.sacarDinero(IdEmisor, saldoTotal);
+            crud_cartera.ingresarDinero(IdReceptor, saldoTotal);
 
+            Log.i("insert", "movimiento bancario entre "+IdEmisor +" y "+IdReceptor+" con un total de "+saldoTotal+"€");
             id = db.insert(Utilidades.TABLE_GASTOS, null, valuesEmision);
             id = db.insert(Utilidades.TABLE_INGRESOS, null, valuesRecepccion);
 
@@ -65,7 +74,14 @@ public class Movimientos extends ConnectionSQLiteHelper {
         }
 
         return id;
+    }
 
+    public void Ingreso(int id, float sald){
+        crud_cartera.ingresarDinero(id, sald);
+    }
+
+    public void Egreso(int id, float sald){
+        crud_cartera.sacarDinero(id, sald);
     }
 
 }

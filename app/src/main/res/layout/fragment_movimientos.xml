@@ -65,6 +65,7 @@
                     android:textSize="25dp" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/Txt_SaldoTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="38dp"
@@ -136,7 +137,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_NewMovimineto"
+                android:id="@+id/btn_CargarMoviminetos"
                 android:layout_width="90dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="30dp"
@@ -153,7 +154,7 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hacer Movimiento"
+                        android:text="Cargar Movimiento"
                         android:textAlignment="center"
                         android:textColor="#fff" />
 
@@ -185,11 +186,22 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <ListView
-                android:id="@+id/ListCarteras"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentEnd="true" />
+                android:orientation="vertical">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ListView
+                        android:id="@+id/ListaTransacciones"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true" />
+                </ScrollView>
+            </LinearLayout>
 
 
         </LinearLayout>

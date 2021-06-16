@@ -2,6 +2,7 @@ package com.example.economy.CRUD;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -11,6 +12,7 @@ import com.example.economy.Entities.Cartera;
 import com.example.economy.Utilities.Utilidades;
 import com.example.economy.connection.ConnectionSQLiteHelper;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Carteras extends ConnectionSQLiteHelper {
@@ -45,4 +47,59 @@ public class Carteras extends ConnectionSQLiteHelper {
 
     }
 
+    public void sacarDinero(int idCartera, float saldo) {
+        try {
+            ConnectionSQLiteHelper conn = new ConnectionSQLiteHelper(context);
+            SQLiteDatabase dbUpdate = conn.getWritableDatabase();
+            SQLiteDatabase dbRead = conn.getReadableDatabase();
+            ContentValues values = new ContentValues();
+
+
+            String Strg_id[] = {String.valueOf(idCartera)};
+            String Strg_saldo = String.valueOf(saldo);
+
+            values.put("Id", idCartera);
+            values.put("SaldoTotal", Strg_saldo);
+
+            Log.i("Gasto", "Retiramos. "+saldo+" de la cuenta "+idCartera);
+
+            Cursor cursor =  dbRead.rawQuery("select SaldoTotal from Carteras where Id = ?", Strg_id);
+            cursor.moveToFirst();
+            float saldoCartera = cursor.getFloat(0);
+            saldo = saldoCartera - saldo;
+
+            dbUpdate.execSQL("Update Carteras set SaldoTotal = "+saldo+" where Id="+idCartera);
+        }catch (Exception ex){
+            ex.toString();
+        }
+
+    }
+
+    public void ingresarDinero(int idCartera, float saldo) {
+        try {
+            ConnectionSQLiteHelper conn = new ConnectionSQLiteHelper(context);
+            SQLiteDatabase dbUpdate = conn.getWritableDatabase();
+            SQLiteDatabase dbRead = conn.getReadableDatabase();
+            ContentValues values = new ContentValues();
+
+            String Strg_id[] = {String.valueOf(idCartera)};
+            String Strg_saldo = String.valueOf(saldo);
+
+            values.put("Id", idCartera);
+            values.put("SaldoTotal", Strg_saldo);
+
+            Log.i("Ingreso", "ingresamos. "+saldo+" en la cuenta "+idCartera);
+
+
+            Cursor cursor =  dbRead.rawQuery("select SaldoTotal from Carteras where Id = ?", Strg_id);
+            cursor.moveToFirst();
+            float saldoCartera = cursor.getFloat(0);
+            saldo = saldoCartera + saldo;
+
+            dbUpdate.execSQL("Update Carteras set SaldoTotal = "+saldo+" where Id="+idCartera);
+        }catch (Exception ex){
+            ex.toString();
+        }
+
+    }
 };
