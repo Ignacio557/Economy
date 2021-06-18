@@ -44,9 +44,7 @@ public class MovimientosFragment extends Fragment {
 
     private TextView Txt_SaldoTotal;
 
-    public MovimientosFragment() {
-        // Required empty public constructor
-    }
+    public MovimientosFragment() {}
 
     public static MovimientosFragment newInstance() {
         Bundle args = new Bundle();
@@ -59,7 +57,6 @@ public class MovimientosFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -136,8 +133,7 @@ public class MovimientosFragment extends Fragment {
 
     private void obtenerLista() {
         inf_carteras = new ArrayList<String>();
-        inf_carteras.add("Todas");
-        for (int i=0; i<inf_carteras.size(); i++){
+        for (int i=0; i<arr_carteras.size(); i++){
             inf_carteras.add(arr_carteras.get(i).getID()+" "+arr_carteras.get(i).getNombre());
         }
     }

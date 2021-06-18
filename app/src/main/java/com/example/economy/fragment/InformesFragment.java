@@ -43,8 +43,8 @@ public class InformesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        vista = inflater.inflate(R.layout.fragment_home, container, false);
-        CargarEstadisticas();
+        vista = inflater.inflate(R.layout.fragment_informes, container, false);
+       // CargarEstadisticas();
 
         return vista;
 
