@@ -21,4 +21,9 @@
     <string name="crear_cartera">Crear cartera</string>
     <string name="nombreCartera">Nombre de la Cartera</string>
     <string name="saldo_inicial">Saldo inicial</string>
+    <string name="txt_psswd">Contraseña</string>
+    <string name="txt_bienvenida">Bienvenido a:</string>
+    <string name="txt_loginTitle">Login</string>
+    <string name="txt_CrearCuenta">¿Aun no estas registrado? hazlo aquí.</string>
+    <string name="txt_tituloMovimientos">Mostrando todos los movimientos de:</string>
 </resources>

@@ -2,7 +2,6 @@ package com.example.economy.Dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -17,54 +16,65 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.economy.CRUD.Carteras;
+import com.example.economy.CRUD.Movimientos;
 import com.example.economy.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Form_CrearCartera extends AppCompatDialogFragment{
+public class Form_CrearMovimiento extends AppCompatDialogFragment {
 
-    private EditText eTxt_NombreCartera;
-    private EditText eTxt_saldoCartera;
-    private Carteras newCartera;
+    private EditText eTxt_CarteraEmisora;
+    private EditText eTxt_CarteraReceptora;
+    private EditText eTxt_TituloMoviminetos;
+    private EditText eTxt_Saldo;
+    private Movimientos newTransaccion;
+    //private CrearCarteraListener listener;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        newCartera = new Carteras(getContext());
+        newTransaccion = new Movimientos(getContext());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.layout_dialog_formulario_cartera, null);
-        eTxt_NombreCartera = view.findViewById(R.id.edit_nombreCartera);
-        eTxt_saldoCartera = view.findViewById(R.id.edit_saldoCartera);
-        eTxt_saldoCartera.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
+        View view = inflater.inflate(R.layout.layout_dialog_formulario_movimientos, null);
+
         builder.setView(view)
-                .setTitle("Nueva Cartera")
+                .setTitle("Nueva Transaccion")
                 .setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 })
-                .setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Realizar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String nombre  = eTxt_NombreCartera.getText().toString();
-                        String S_saldo = eTxt_saldoCartera.getText().toString();
-                        Float F_saldo  = Float.parseFloat(S_saldo);
+                        String S_emisor   = eTxt_CarteraEmisora.getText().toString();
+                        String S_receptor = eTxt_CarteraReceptora.getText().toString();
+                        String titulo   = eTxt_TituloMoviminetos.getText().toString();
+                        String S_saldo  = eTxt_Saldo.getText().toString();
 
-                        Log.i("insert", "insertamos "+nombre+" con el saldo "+S_saldo);
-                        newCartera.insertCartera(nombre, F_saldo);
+                        int emisor = Integer. parseInt(S_emisor);
+                        int receptor = Integer. parseInt(S_receptor);
+                        Float F_saldo = Float.parseFloat(S_saldo);
+
+                        Log.i("insert", "insertamos movimiento "+ titulo +" con el saldo "+S_saldo);
+                        newTransaccion.tranferencia(titulo, emisor, receptor, F_saldo);
                     }
                 });
 
-
+        eTxt_CarteraEmisora = view.findViewById(R.id.edit_CarteraEmisora);
+        eTxt_CarteraReceptora = view.findViewById(R.id.edit_CarteraReceptora);
+        eTxt_TituloMoviminetos = view.findViewById(R.id.edit_TituloMovimiento);
+        eTxt_Saldo = view.findViewById(R.id.edit_saldoCartera);
+        eTxt_Saldo.setFilters(new InputFilter[]{new Form_CrearCartera.DecimalDigitsInputFilter(5, 2)});
 
         return builder.create();
     };
 
-    static class DecimalDigitsInputFilter implements InputFilter {
+    class DecimalDigitsInputFilter implements InputFilter {
         private Pattern mPattern;
         DecimalDigitsInputFilter(int digitsBeforeZero, int digitsAfterZero) {
             mPattern = Pattern.compile("[0-9]{0," + (digitsBeforeZero - 1) + "}+((\\.[0-9]{0," + (digitsAfterZero - 1) + "})?)||(\\.)?");
@@ -78,4 +88,4 @@ public class Form_CrearCartera extends AppCompatDialogFragment{
         }
     }
 
-};
+}

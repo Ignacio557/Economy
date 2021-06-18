@@ -21,10 +21,23 @@
             android:orientation="vertical"
             android:gravity="center">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/txt_email"
+                android:textColor="@color/Principal"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/editTextTextEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:ems="10"
                 android:hint="@string/txt_email"
                 android:inputType="textEmailAddress" />
@@ -33,7 +46,10 @@
                 android:id="@+id/btnResetPasswd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                android:text="Enviar Correo" />
         </LinearLayout>
     </LinearLayout>
 

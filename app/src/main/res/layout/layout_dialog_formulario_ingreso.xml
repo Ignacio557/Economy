@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/edit_nombreCartera"
+        android:id="@+id/edit_TituloTransaccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/nombreCartera"/>
 
     <EditText
-        android:id="@+id/edit_saldoCartera"
+        android:id="@+id/edit_Movimiento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/saldo_inicial"
-        android:layout_below="@+id/edit_nombreCartera"
+        android:layout_below="@+id/edit_TituloTransaccion"
         android:layout_alignParentStart="true"
         android:inputType="numberDecimal"/>
 
